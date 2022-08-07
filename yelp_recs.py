@@ -1,7 +1,11 @@
 import requests
 import json
-headers = {'Authorization': 'Bearer %s' % "API_KEY"}
-yelp = "https://api.yelp.com/v3"
+yelp_api = "https://api.yelp.com/v3/"
 
-x = requests.get(yelp)
-print(x.text)
+
+x = requests.get(yelp_api)
+print(dir(x))
+
+data = json.loads(x.text)
+print(type(data))
+print(data)
