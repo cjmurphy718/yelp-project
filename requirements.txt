@@ -1,5 +1,5 @@
 ##Install requests
-python -m pip install requests
+python pip install requests
 
 ##Install json
 brew install jq
