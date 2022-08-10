@@ -2,9 +2,9 @@
 
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
 
-from app.yelp_recs import get_hourly_forecasts
+#from app.yelp_recs import get_hourly_forecasts
 
-weather_routes = Blueprint("weather_routes", __name__)
+home_routes = Blueprint("yelp_recs", __name__)
 
 #@weather_routes.route("/weather/form")
 #def weather_form():

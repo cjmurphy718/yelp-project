@@ -1,11 +1,11 @@
 ##Install requests
-python pip install requests
+requests
 
 ##Install json
-brew install jq
+jq
 
 ##Install yelp
-python pip install yelpapi
+yelpapi
 
 ##Install flask
-instal flask
+flask
