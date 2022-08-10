@@ -3,3 +3,7 @@ python -m pip install requests
 
 ##Install json
 brew install jq
+
+##Install yelp
+python pip install yelpapi
+

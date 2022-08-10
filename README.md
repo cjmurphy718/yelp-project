@@ -18,7 +18,7 @@ conda activate yelp-env
 
 Install requirements
 ```sh
-pip install yelpapi
+pip install -r requirements.txt
 ```
 
 Run the code
@@ -26,4 +26,3 @@ Run the code
 python yelp_recs.py
 ```
 
-Input your Client ID and hit enter, followed by your API Key and hit enter - You will not see the text.
