@@ -7,3 +7,5 @@ brew install jq
 ##Install yelp
 python pip install yelpapi
 
+##Install flask
+instal flask

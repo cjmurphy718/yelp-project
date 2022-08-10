@@ -26,3 +26,8 @@ Run the code
 python yelp_recs.py
 ```
 
+
+## Run Web App
+```sh
+FLASK_APP=web_app flask run
+```
