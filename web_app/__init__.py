@@ -1,12 +1,12 @@
 
 # web_app/__init__.py
 
-import os
-from dotenv import load_dotenv
+#import os
+#from dotenv import load_dotenv
 from flask import Flask
-from app import APP_ENV
+#from app import APP_ENV
 
-APP_ENV = os.getenv("APP_ENV", default="production")
+#APP_ENV = os.getenv("APP_ENV", default="production")
 
 
 from web_app.routes.home_routes import home_routes
@@ -14,7 +14,7 @@ from web_app.routes.yelp_routes import yelp_routes
 
 #from web_app.routes.book_routes import book_routes
 
-load_dotenv()
+#load_dotenv()
 
 def create_app():
     app = Flask(__name__)

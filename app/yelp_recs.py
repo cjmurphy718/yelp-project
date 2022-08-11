@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-APP_ENV = os.getenv("APP_ENV", default="production") # use "production" on a remote server
+APP_ENV = os.getenv("APP_ENV", default="development") # use "production" on a remote server
 API_KEY = os.getenv("API_KEY")
 ZIP_CODE = 10001
 PRICE_MEDIAN = 2
@@ -17,19 +17,19 @@ valid_choices = ("pizza", "mexican", "italian", "mexican", "sushi", "american", 
 conMil = 1609.34
 
 def get_location():
-    if APP_ENV=="production":
+    if APP_ENV=="development":
         user_zip = input("What is your 5-digit zip code? ")
     else:
         user_zip = ZIP_CODE
     return user_zip
 def get_price():
-    if APP_ENV=="production":
+    if APP_ENV=="development":
         price_limit = input("What price do you want to pay on a scale of 1-4, 4 being the most expensive? ")
     else:
         price_limit = PRICE_MEDIAN
     return price_limit
 def get_radius():
-    if APP_ENV=="production":
+    if APP_ENV=="development":
         radius_limit = input("How many miles are you willing to go? ")
         radius_limit = int(radius_limit)
         radius_limit = radius_limit * conMil
@@ -38,7 +38,7 @@ def get_radius():
         radius_limit = RADIUS_DEFAULT
     return radius_limit   
 def get_category():
-    if APP_ENV=="production":
+    if APP_ENV=="development":
         category_choice = input("Are you craving anything? ")
     else:
         category_choice = random.choice(valid_choices)
