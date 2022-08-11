@@ -58,7 +58,7 @@ def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
         'location': user_zip
     }
     request_headers = {'Authorization': f"bearer {API_KEY}"}
-    print(request_headers)
+    #print(request_headers)
     response = requests.get(url=request_url, params=request_params, headers=request_headers)
     parsed = json.loads(response.text)
     #pprint(parsed)
@@ -74,6 +74,16 @@ def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
        # "Rating": business["rating"],
        # "Address": " ".join(business["location"]["display_address"]),
        # "Phone": business["phone"]
+        ## Import Business Reviews
+    business_id = business["id"]
+    reviews_url = f"https://api.yelp.com/v3/businesses/{business_id}/reviews"
+    req = requests.get(url=reviews_url, headers=request_headers)
+    parsed_reviews = json.loads(req.text)
+
+    print("What have recent visitors said about", business["name"], "...")
+    for review in parsed_reviews["reviews"]:
+        print("Rating: ", review["rating"])
+        print(review["text"])
     return
 if __name__ == "__main__":
     user_zip=get_location()
