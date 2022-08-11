@@ -2,52 +2,65 @@
 
 from flask import Blueprint, request, jsonify, render_template, redirect, flash
 
-from app.yelp_recs import get_hourly_forecasts
+from app.yelp_recs import get_yelp_recs
 
-weather_routes = Blueprint("weather_routes", __name__)
+yelp_routes = Blueprint("yelp_routes", __name__)
 
-@weather_routes.route("/weather/form")
-def weather_form():
-    print("WEATHER FORM...")
-    return render_template("weather_form.html")
+@yelp_routes.route("/yelp/form")
+def yelp_form():
+    print("YELP FORM...")
+    return render_template("yelp_form.html")
 
-@weather_routes.route("/weather/forecast", methods=["POST"])
-def weather_forecast():
-    print("WEATHER FORECAST...")
+@yelp_routes.route("/yelp/results", methods=["POST"])
+def yelp_results():
+    print("YOUR DATE NIGHT...")
 
     request_data = dict(request.form)
     print("FORM DATA:", request_data)
 
-    country_code = request_data.get("country_code") or "US"
-    zip_code = request_data.get("zip_code") or "20057"
+    user_zip = request_data.get("user_zip") or "10001"
+    price_limit = request_data.get("price_limit") or "2"
+    radius_limit = request_data.get("radius_limit") or "1000"
+    category_choice = request_data.get("category_choice")
 
-    results = get_hourly_forecasts(country_code=country_code, zip_code=zip_code)
-    if results:
+    #zip_code = request_data.get("zip_code") or "20057"
+
+    result = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
+    if result:
         #flash("Weather Forecast Generated Successfully!", "success")
-        return render_template("weather_forecast.html",
-            country_code=country_code,
-            zip_code=zip_code,
-            results=results
+        return render_template("yelp_results.html",
+            user_zip=user_zip,
+            price_limit=price_limit,
+            radius_limit=radius_limit,
+            category_choice=category_choice,
+           #country_code=country_code,
+            #zip_code=zip_code,
+            result=result
         )
     else:
         #flash("Geography Error. Please try again!", "danger")
-        return redirect("/weather/form")
+        return redirect("/yelp/form")
 
 #
 # API ROUTES
 #
 
-@weather_routes.route("/api/weather/forecast.json")
-def weather_forecast_api():
-    print("WEATHER FORECAST (API)...")
+@yelp_routes.route("/api/yelp/results.json")
+def yelp_results_api():
+    print("YELP RESULTS (API)...")
 
     url_params = dict(request.args)
     print("URL PARAMS:", url_params)
 
-    country_code = url_params.get("country_code") or "US"
-    zip_code = url_params.get("zip_code") or "20057"
+   user_zip = url_params.get("location")
+   category_choice = url_params.get("categories")
+   price_limit = url_params.get("price")
+   radius_limit = url.params.get("radius")
 
-    results = get_hourly_forecasts(country_code=country_code, zip_code=zip_code)
+   #ountry_code = url_params.get("country_code") or "US"
+   # zip_code = url_params.get("zip_code") or "20057"
+
+    results = get_yelp_recs (user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
     if results:
         return jsonify(results)
     else:

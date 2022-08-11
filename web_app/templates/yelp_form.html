@@ -2,18 +2,25 @@
 
 {% block content %}
 
-    <h2>Yelp Form</h2>
+    <h2>Find the perfect date night!</h2>
 
-    <p>Request an hourly forecast for your zip code...</p>
 
     <form action="/yelp/form/" method="POST">
 
-        <label>Zip Code:</label>
+        <label>What is your 5-digit zip code?:</label>
         <input type="text" name="user_zip">
         <br>
 
-        <label>Radius:</label>
-        <input type="text" name="radius" placeholder="1" value="2">
+        <label>How many miles are you willing to go?</label>
+        <input type="text" name="radius">
+        <br>
+
+        <label>Are you craving anything? You can leave this blank if not!</label>
+        <input type="text" name="category_choice">
+        <br>
+
+        <label><b>How much are you willing to pay, on a scale from 1-4 (with 4 as the most expensive)?</b></label></label>
+        <input type="text" name="price_limit">
         <br>
 
         <button>Submit</button>
