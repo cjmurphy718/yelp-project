@@ -12,3 +12,5 @@ flask
 
 ##Install dotenv
 python-dotenv
+
+gunicorn

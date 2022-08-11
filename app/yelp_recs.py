@@ -57,11 +57,13 @@ def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
         'categories': category_choice, # FYI looks like when we do a search for businesses with categories ['chinese', 'pizza'] it seems to return either chinese OR pizza. Not restaurants that are a fusion / combination of both
         'location': user_zip
     }
+    print(request_params)
     request_headers = {'Authorization': f"bearer {API_KEY}"}
     #print(request_headers)
     response = requests.get(url=request_url, params=request_params, headers=request_headers)
+    print(response)
     parsed = json.loads(response.text)
-    #pprint(parsed)
+    pprint(parsed)
     businesses = parsed["businesses"]
    # business_result = []
     for business in businesses:
