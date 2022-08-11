@@ -18,14 +18,15 @@ def yelp_results():
     request_data = dict(request.form)
     print("FORM DATA:", request_data)
 
-    user_zip = request_data.get("location") or "10001"
-    price_limit = request_data.get("price") or "2"
-    radius_limit = request_data.get("radius") or "1000"
-    category_choice = request_data.get("categories")
+
+    user_zip = request_data.get("user_zip") or "10001"
+    price_limit = request_data.get("price_limit") or "2"
+    radius_limit = request_data.get("radius_limit") or "1000"
+    category_choice = request_data.get("category_choice")
 
     #zip_code = request_data.get("zip_code") or "20057"
 
-    result = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
+    results = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
     if result:
         #flash("Weather Forecast Generated Successfully!", "success")
         return render_template("yelp_results.html",
@@ -35,7 +36,7 @@ def yelp_results():
             category_choice=category_choice,
            #country_code=country_code,
             #zip_code=zip_code,
-            result=result
+            results=results
         )
     else:
         #flash("Geography Error. Please try again!", "danger")
