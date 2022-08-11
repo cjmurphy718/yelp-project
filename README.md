@@ -21,10 +21,6 @@ Install requirements
 pip install -r requirements.txt
 ```
 
-Run the code
-```sh
-python yelp_recs.py
-```
 
 
 ## Run Web App

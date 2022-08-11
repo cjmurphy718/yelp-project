@@ -13,21 +13,21 @@ def yelp_form():
 
 @yelp_routes.route("/yelp/results", methods=["POST"])
 def yelp_results():
-    print("YOUR DATE NIGHT...")
+    print("YOUR DINNER PLANS...")
 
     request_data = dict(request.form)
     print("FORM DATA:", request_data)
 
 
-    user_zip = request_data.get("user_zip") or "10001"
-    price_limit = request_data.get("price_limit") or "2"
-    radius_limit = request_data.get("radius_limit") or "1000"
-    category_choice = request_data.get("category_choice")
+    user_zip = request_data.get("location") or "10001"
+    price_limit = request_data.get("price") or "2"
+    radius_limit = request_data.get("radius") or "1000"
+    category_choice = request_data.get("categories")
 
     #zip_code = request_data.get("zip_code") or "20057"
 
     results = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
-    if result:
+    if results:
         #flash("Weather Forecast Generated Successfully!", "success")
         return render_template("yelp_results.html",
             user_zip=user_zip,
@@ -53,16 +53,16 @@ def yelp_results_api():
     url_params = dict(request.args)
     print("URL PARAMS:", url_params)
 
-    user_zip = url_params.get("location")
-    category_choice = url_params.get("categories")
-    price_limit = url_params.get("price")
-    radius_limit = url_params.get("radius")
+    user_zip = url_params.get("location") or "10001"
+    category_choice = url_params.get("categories") or "pizza"
+    price_limit = url_params.get("price") or "2"
+    radius_limit = url_params.get("radius") or "2"
 
    #ountry_code = url_params.get("country_code") or "US"
    # zip_code = url_params.get("zip_code") or "20057"
 
-    result = get_yelp_recs (user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
-    if result:
+    results = get_yelp_recs (user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
+    if results:
         return jsonify(result)
     else:
         return jsonify({"message":"Invalid Geography. Please try again."}), 404

@@ -43,10 +43,10 @@ def get_category():
     else:
         category_choice = random.choice(valid_choices)
     return category_choice    
-def get_yelp_recs():
+def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
     request_url = "https://api.yelp.com/v3/businesses/search"
     request_params = {
-       'term': 'dinner', 
+        'term': 'dinner', 
         'limit': 1, 
         'price': price_limit,
         'radius': radius_limit, 

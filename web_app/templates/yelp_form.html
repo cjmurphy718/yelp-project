@@ -1,14 +1,22 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
-    <h2>Find the perfect date night!</h2>
+<html>
+<head>
+<style>
+body {
+  font-family: Tahoma, sans-serif;
+}
+</style>
+</head>
+<body>
+    <h2>Find the perfect restaurant for tonight!</h2>
 
 
     <form action="/yelp/results/" method="POST">
 
         <label><b>What is your 5-digit zip code?</b></label>
-        <input type="text" name="user_zip" value=""
+        <input type="text" name="user_zip">
         <br>
 
         <label><b>How many miles are you willing to go?</b></label>
@@ -25,5 +33,8 @@
 
         <button>Submit</button>
     </form>
+
+</body>
+</html>
 
 {% endblock %}
