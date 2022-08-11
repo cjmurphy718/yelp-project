@@ -1,6 +1,7 @@
 import os
 import json
 from pprint import pprint
+from tkinter import N
 import requests
 import random
 from dotenv import load_dotenv
@@ -45,6 +46,8 @@ def get_category():
         category_choice = random.choice(valid_choices)
     return category_choice
 
+print("-----------\n")
+
 
 def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
 #def get_yelp_recs(location, price, radius, category)
@@ -57,16 +60,17 @@ def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
         'categories': category_choice, # FYI looks like when we do a search for businesses with categories ['chinese', 'pizza'] it seems to return either chinese OR pizza. Not restaurants that are a fusion / combination of both
         'location': user_zip
     }
-    print(request_params)
+   # print(request_params)
     request_headers = {'Authorization': f"bearer {API_KEY}"}
     #print(request_headers)
     response = requests.get(url=request_url, params=request_params, headers=request_headers)
-    print(response)
+   # print(response)
     parsed = json.loads(response.text)
-    pprint(parsed)
+   # pprint(parsed)
     businesses = parsed["businesses"]
    # business_result = []
     for business in businesses:
+        print("-----------\n")
         print("Name:", business["name"])
         print("Rating:", business["rating"])
         print("Address:", " ".join(business["location"]["display_address"]))
@@ -81,16 +85,16 @@ def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
     reviews_url = f"https://api.yelp.com/v3/businesses/{business_id}/reviews"
     req = requests.get(url=reviews_url, headers=request_headers)
     parsed_reviews = json.loads(req.text)
-
+    print("-----------\n")
     print("What have recent visitors said about", business["name"], "...")
     for review in parsed_reviews["reviews"]:
         print("Rating: ", review["rating"])
         print(review["text"])
-    return
+    return businesses, parsed_reviews
 if __name__ == "__main__":
     user_zip=get_location()
     price_limit=get_price()
     radius_limit=get_radius()
     category_choice=get_category()
-    result = get_yelp_recs(user_zip, price_limit, radius_limit, category_choice)
+    business,parsed_reviews = get_yelp_recs(user_zip, price_limit, radius_limit, category_choice)
     #print(get_yelp_recs())
