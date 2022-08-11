@@ -17,7 +17,7 @@ def about():
     print("WHERE TO TONIGHT?!...")
     return render_template("yelp_form.html")
 
-@home_routes.route("/yelp/results")
+@home_routes.route("/yelp/form")
 def results():
     url_params = dict(request.args)
     return render_template("yelp_results.html")

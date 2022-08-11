@@ -19,16 +19,17 @@ def yelp_results():
     print("FORM DATA:", request_data)
 
 
-    user_zip = request_data.get(user_zip) or "10001"
-    price_limit = request_data.get(price_limit) or "2"
-    radius_limit = request_data.get(radius_limit) or "1000"
-    category_choice = request_data.get(category_choice) or "pizza"
+    user_zip = request_data.get("user_zip") or "10001"
+    price_limit = request_data.get("price_limit") or "2"
+    radius_limit = request_data.get("radius_limit") or "2"
+    category_choice = request_data.get("category_choice") or "pizza"
 
     #zip_code = request_data.get("zip_code") or "20057"
 
     results = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
+    print(results)
     if results:
-        #flash("Weather Forecast Generated Successfully!", "success")
+        #flash("Yelp Results Generated Successfully!", "success")
         return render_template("yelp_results.html",
             user_zip=user_zip,
             price_limit=price_limit,
@@ -39,7 +40,7 @@ def yelp_results():
             results=results
         )
     else:
-        #flash("Geography Error. Please try again!", "danger")
+        #flash("Yelp Error. Please try again!", "danger")
         return redirect("/yelp/form")
 
 #
@@ -61,8 +62,17 @@ def yelp_results_api():
    #ountry_code = url_params.get("country_code") or "US"
    # zip_code = url_params.get("zip_code") or "20057"
 
-    results = get_yelp_recs (user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
+    results = get_yelp_recs(user_zip=user_zip, price_limit=price_limit, radius_limit=radius_limit, category_choice=category_choice)
     if results:
-        return jsonify(result)
+        return jsonify(results)
+       # return render_template("yelp_results.html",
+        #user_zip=user_zip,
+         #   price_limit=price_limit,
+          #  radius_limit=radius_limit,
+           # category_choice=category_choice,
+           #country_code=country_code,
+            #zip_code=zip_code,
+         #   results=results
+      #  )
     else:
         return jsonify({"message":"Invalid Geography. Please try again."}), 404

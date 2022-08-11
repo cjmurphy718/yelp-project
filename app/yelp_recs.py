@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 APP_ENV = os.getenv("APP_ENV", default="development") # use "production" on a remote server
 API_KEY = os.getenv("API_KEY")
+#API_KEY = "3WOmkQBoYZN93FxNoFjA-s-39rEC6EzX7gey0LIQaSBQhAhTp-tSNbTvoh6TR_Rwrl2NoFt1GSPuGAU32BG8-rLrnLvHQIG7kow8ABa0UuFGd6D44RcuY8Ql9F_tYnYx"
 ZIP_CODE = 10001
 PRICE_MEDIAN = 2
 RADIUS_DEFAULT = 1000
@@ -44,6 +45,7 @@ def get_category():
         category_choice = random.choice(valid_choices)
     return category_choice    
 def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
+#def get_yelp_recs(location, price, radius, category)
     request_url = "https://api.yelp.com/v3/businesses/search"
     request_params = {
         'term': 'dinner', 
