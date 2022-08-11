@@ -9,3 +9,6 @@ yelpapi
 
 ##Install flask
 flask
+
+##Install dotenv
+python-dotenv
