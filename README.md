@@ -6,6 +6,11 @@ Create an API Key on the Yelp website:
 https://www.yelp.com/developers/v3/manage_app
 Save this in a .env file under "API_KEY" and "CLIENT_ID"
 
+Use director search to navigate to the yelp-project file
+```sh
+cd Desktop/yelp-project
+```
+
 Create a virtual environment
 ```sh
 conda create yelp-env
