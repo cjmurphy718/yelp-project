@@ -20,6 +20,7 @@ def yelp_results():
 
 
     user_zip = request_data.get("user_zip") or "10001"
+    print(user_zip)
     price_limit = request_data.get("price_limit") or "2"
     radius_limit = request_data.get("radius_limit") or "2"
     category_choice = request_data.get("category_choice") or "pizza"

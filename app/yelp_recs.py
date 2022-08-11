@@ -37,25 +37,28 @@ def get_radius():
         radius_limit = int(radius_limit)
     else:
         radius_limit = RADIUS_DEFAULT
-    return radius_limit   
+    return radius_limit
 def get_category():
     if APP_ENV=="development":
         category_choice = input("Are you craving anything? ")
     else:
         category_choice = random.choice(valid_choices)
-    return category_choice    
+    return category_choice
+
+
 def get_yelp_recs(user_zip, price_limit, radius_limit, category_choice):
 #def get_yelp_recs(location, price, radius, category)
     request_url = "https://api.yelp.com/v3/businesses/search"
     request_params = {
-        'term': 'dinner', 
-        'limit': 1, 
+        'term': 'dinner',
+        'limit': 1,
         'price': price_limit,
-        'radius': radius_limit, 
+        'radius': radius_limit,
         'categories': category_choice, # FYI looks like when we do a search for businesses with categories ['chinese', 'pizza'] it seems to return either chinese OR pizza. Not restaurants that are a fusion / combination of both
         'location': user_zip
     }
     request_headers = {'Authorization': f"bearer {API_KEY}"}
+    print(request_headers)
     response = requests.get(url=request_url, params=request_params, headers=request_headers)
     parsed = json.loads(response.text)
     #pprint(parsed)
@@ -77,7 +80,5 @@ if __name__ == "__main__":
     price_limit=get_price()
     radius_limit=get_radius()
     category_choice=get_category()
-    result = get_yelp_recs()
+    result = get_yelp_recs(user_zip, price_limit, radius_limit, category_choice)
     #print(get_yelp_recs())
-
-
